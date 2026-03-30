@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:15
+    container_name: smartinput_db_container
+    restart: always
+    environment:
+      POSTGRES_USER: user_vittal
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: smartinput_db
+    ports:
+      - "5433:5432" 
+
+  adminer:
+    image: adminer
+    container_name: smartinput_adminer
+    restart: always
+    ports:
+      - "8080:8080" 
