@@ -1,8 +1,10 @@
 import os
 import psycopg2
+from dotenv import load_dotenv
 from psycopg2.extras import Json
 
 def salvar_no_banco(resultado, original):
+    load_dotenv()
     try:
         conn = psycopg2.connect(
             host=os.getenv("DB_HOST"),

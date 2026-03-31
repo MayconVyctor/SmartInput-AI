@@ -1,24 +1,22 @@
-# SmartInput AI 🧠🚀
+# 🤖 SmartInputAI - Triagem Inteligente de Suporte
 
-**SmartInput** é uma solução de engenharia de software desenvolvida para automatizar a triagem e classificação de dados não estruturados. Utilizando Inteligência Artificial (LLMs), o sistema transforma entradas de texto bruto em dados estruturados prontos para persistência em bancos de dados relacionais.
+O **SmartInputAI** é um motor de automação que utiliza Inteligência Artificial (Google Gemini) para processar textos não estruturados de suporte técnico, categorizá-los e armazená-los de forma organizada em um banco de dados relacional.
 
-## 🎯 O Problema
-Processos de triagem manual são lentos, sujeitos a erros e criam gargalos operacionais. O **SmartInput** visa eliminar essa dependência, aumentando a agilidade do fluxo de dados em até 90%.
+## 🚀 Tecnologias
+- **Python 3.10+** (Core)
+- **FastAPI/Pydantic** (Estruturação de dados)
+- **PostgreSQL** (Armazenamento)
+- **Docker & Docker Compose** (Ambiente isolado)
+- **Google Gemini API** (Processamento de Linguagem Natural)
 
-## 🛠️ Stack Tecnológica
-- **Linguagem:** Python 3.11
-- **IA:** OpenAI API 
-- **Validação de Dados:** Pydantic 
-- **Banco de Dados:** PostgreSQL
-- **Infraestrutura:** Docker & Docker Compose
+## 🛠️ Diferenciais Técnicos
+- **Resiliência de API**: Implementação de lógica de *fallback* multi-modelo (Flash Lite, Pro, Latest).
+- **Tratamento de Quota**: Gestão inteligente de erros 429 com `time.sleep` dinâmico baseado no cabeçalho da API.
+- **Clean Architecture**: Separação clara entre modelos de dados, serviços de IA e persistência.
 
-## ⚙️ Como Funciona
-1. **Captura:** O sistema recebe um texto não estruturado (e-mails, logs, mensagens).
-2. **Processamento:** Através de engenharia de prompt e integração com a API da OpenAI, as entidades-chave são extraídas.
-3. **Validação:** O Pydantic valida se o JSON de retorno está conforme o contrato definido.
-4. **Persistência:** Os dados validados são salvos automaticamente no PostgreSQL via `psycopg2`.
-
-## 🐳 Execução com Docker
-Para rodar o ambiente de banco de dados:
-```bash
-docker-compose up -d
+## 📦 Como Rodar
+1. Clone o repositório.
+2. Configure seu `.env` com a `GOOGLE_API_KEY`.
+3. Suba o banco: `docker-compose up -d`.
+4. Instale dependências: `pip install -r requirements.txt`.
+5. Execute: `python3 main.py`.
