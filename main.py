@@ -1,28 +1,21 @@
-import os
-from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
 from app.services.ai_service import processar_texto_com_ia
-from app.database.connection import salvar_no_banco
+from app.models.schema import DadosTriagem
 
-load_dotenv()
 
-def run_smart_input():
+app = FastAPI()
 
-    print("--- Iniciando SmartInputAI ---")
+@app.get("/")
+def home():
+    return {"status": "SmartInputAI API Rodando"}
 
-    texto_bruto = (
-        "Ola, o usuario Maycon Vyctor relatou lentidao no sistema de vitoria da conquista"
-        "Disse que nao consegue gerar relatorios desde as 08:00. prioridade maxima"
-    )
-
+@app.post("/triagem", response_model=DadosTriagem)
+def realizar_triagem(texto_bruto: str):
     try:
-        print(" Enviando para analise da inteligencia artificial...")
-        resultado_ia = processar_texto_com_ia(texto_bruto)
-        print(f"Salvando no banco de dados (Urgencia: {resultado_ia.urgencia})...")
-        salvar_no_banco(resultado_ia, texto_bruto)
-        print("Fluxo Finalizado com sucesso!")
+  
+        resultado = processar_texto_com_ia(texto_bruto)
+        
 
-    except Exception as error:
-        print(f"Ocorreu um erro no fluxo: {error}")
-
-if __name__ == "__main__":
-    run_smart_input()
+        return resultado
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
