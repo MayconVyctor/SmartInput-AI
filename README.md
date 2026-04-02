@@ -9,6 +9,24 @@ O **SmartInputAI** é um motor de automação que utiliza Inteligência Artifici
 - **Docker & Docker Compose** (Ambiente isolado)
 - **Google Gemini API** (Processamento de Linguagem Natural)
 
+## 🌐 API Endpoints (FastAPI)
+
+O projeto agora conta com uma interface de API documentada automaticamente pelo Swagger. 
+
+### Como acessar:
+1. Com o servidor rodando (`uvicorn main:app --reload`), acesse:
+   [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+### Demonstração:
+![Swagger UI](./assets/swagger-ui.png)
+
+---
+
+### 🛠️ Novas Funcionalidades:
+- **Endpoint POST `/triagem`**: Recebe um texto bruto e retorna a triagem processada pela IA.
+- **Documentação Automática**: Interface interativa para testes rápidos de integração.
+- **Servidor ASGI**: Preparado para conexões assíncronas com Frontend (React/Vue).
+
 ## 🛠️ Diferenciais Técnicos
 - **Resiliência de API**: Implementação de lógica de *fallback* multi-modelo (Flash Lite, Pro, Latest).
 - **Tratamento de Quota**: Gestão inteligente de erros 429 com `time.sleep` dinâmico baseado no cabeçalho da API.
