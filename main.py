@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, logger
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from app.api.endpoints import router as api_router
 
 app = FastAPI(title="SmartInputAI API",
@@ -18,6 +19,20 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(Exception)
+async def gerenciar_erro_global(request: Request, exc: Exception):
+    logger.error(f"Erro inesperado: {str(exc)}")
+    
+    return JSONResponse(
+        status_code=500,
+        content={
+            "sucesso": False,
+            "mensagem": "Ops! Ocorreu um erro interno no SmartInputAI.",
+            "detalhe": str(exc) 
+        }
+    )
 
 app.include_router(api_router, prefix="/api/v1")
 
