@@ -38,3 +38,10 @@ O projeto agora conta com uma interface de API documentada automaticamente pelo 
 3. Suba o banco: `docker-compose up -d`.
 4. Instale dependências: `pip install -r requirements.txt`.
 5. Execute: `python3 main.py`.
+
+/app
+  /api       <- Rotas
+  /models    <- Pydantic Schemas
+  /services  <- Integração com IA
+  /utils     <- Helpers e Loggers
+main.py      <- Entrypoint
