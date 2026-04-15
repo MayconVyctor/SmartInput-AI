@@ -39,3 +39,12 @@ app.include_router(api_router, prefix="/api/v1")
 @app.get("/")
 def home():
     return {"status": "SmartInputAI API Rodando"}
+
+@app.get("/", tags=["Healthcheck"])
+def health_check():
+    return {
+        "status": "online",
+        "app": "SmartInputAI",
+        "version": "1.0.0",
+        "api_docs": "/docs"
+    }
