@@ -4,19 +4,15 @@ from app.services.ai_service import processar_texto_com_ia
 from app.models.schema import DadosTriagem
 
 
-app = FastAPI()
-
+app = FastAPI(title="SmartInputAI API")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/")
 def home():
     return {"status": "SmartInputAI API Rodando"}
 
-@app.post("/triagem", response_model=DadosTriagem)
-def realizar_triagem(texto_bruto: str):
-    try:
-  
-        resultado = processar_texto_com_ia(texto_bruto)
-        
-
-        return resultado
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
