@@ -1,10 +1,9 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.services.ai_service import processar_texto_com_ia
-from app.models.schema import DadosTriagem
-
+from app.api.endpoints import router as api_router
 
 app = FastAPI(title="SmartInputAI API")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -12,7 +11,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(api_router, prefix="/api/v1")
+
 @app.get("/")
 def home():
     return {"status": "SmartInputAI API Rodando"}
-
