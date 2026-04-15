@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from app.services.ai_service import processar_texto_com_ia
 from app.models.schema import DadosTriagem
 
